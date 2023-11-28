@@ -8,13 +8,28 @@
     Title="AIS">
 
     <ShellContent
-        Title="Home"
+        Title=""
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
     <ShellContent
-        Title="Test"
+        Title=""
         ContentTemplate="{DataTemplate local:TestPage}"
         Route="TestPage" />
+
+    <ShellContent
+        Title=""
+        ContentTemplate="{DataTemplate local:Student}"
+        Route="Student" />
+    
+    <ShellContent
+        Title=""
+        ContentTemplate="{DataTemplate local:Lecturer}"
+        Route="Lecturer" />
+    
+    <ShellContent
+        Title=""
+        ContentTemplate="{DataTemplate local:Administrator}"
+        Route="Administrator" />
 
 </Shell>
