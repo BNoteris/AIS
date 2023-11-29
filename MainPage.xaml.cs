@@ -1,20 +1,28 @@
 ﻿using AIS.Back.DBConfig;
+using AIS.Back.Service;
 using System.Diagnostics;
 
 namespace AIS
+
+    
 {
+
+
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+
+
+        public static readonly UserService _userService = new UserService();
+
 
         public MainPage()
         {
             InitializeComponent();
+
         }
 
         private void OnCounterClicked(object sender, EventArgs e)
         {
-            count++;
 
             //if (count == 1)
             //    CounterBtn.Text = $"Clicked {count} time";
@@ -51,19 +59,20 @@ namespace AIS
                 {
                     Debug.WriteLine("User exists");
                     int userTypeID = dB.getUserTypeID(username, password);
-                    dB.setCredentials(username, password);
+                    Debug.WriteLine("User type ID = " + userTypeID);
+
+                    _userService.Username = username;
+                    _userService.Password = password;
+                    
                     switch (userTypeID)
                     {
                         case 1:
-                            dB.openConnectionExists();
                             sendAdmin();
                             break;
                         case 2:
-                            dB.openConnectionExists();
                             sendLecturer();
                             break;
                         case 3:
-                            dB.openConnectionExists();
                             sendStudent();
                             break;
                         default:
@@ -80,16 +89,15 @@ namespace AIS
 
         private async void sendStudent()
         {
-            await Shell.Current.GoToAsync("");
+            await Shell.Current.GoToAsync("///Student");
         }
         private async void sendLecturer()
         {
-            await Shell.Current.GoToAsync("");
+            await Shell.Current.GoToAsync("///Lecturer");
         }
         private async void sendAdmin()
         {
-            await Shell.Current.GoToAsync("");
+            await Shell.Current.GoToAsync("///Administrator");
         }
     }
-
-}
+ }

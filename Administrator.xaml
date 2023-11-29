@@ -3,10 +3,94 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AIS.Administrator"
              Title="">
+    <ScrollView>
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Sveiki prisijunge."
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center" 
+            FontSize="Large"
+            Margin="20"/>
+            <Grid 
+                  x:Name="interfaceButtons"
+                  ColumnDefinitions="230, *"
+                  RowDefinitions="*, *, *, *, *, *, *, *"
+                  Padding="50 "
+                  RowSpacing="50"
+                  VerticalOptions="Center"
+                  HorizontalOptions="Center">
+             
+                <Button Grid.Row="0"
+                        Grid.Column="0"
+                    x:Name="AddStudent"
+                    Text="Prideti studenta"
+                    SemanticProperties.Description="Prideti nauja studenta i AIS"
+                    SemanticProperties.Hint="Paspaudus mygtuka atsiras meniu, leidziantis sukurti nauja studenta"
+                        Clicked="OnASClicked"
+                    IsVisible="true"
+                    />
+                <Button Grid.Row="1"
+                        Grid.Column="0"
+                    x:Name="RemoveStudent"
+                    Text="Istrinti studenta"
+                    SemanticProperties.Description="Istrinti studenta is AIS"
+                    SemanticProperties.Hint="Paspaudus mygtuka atsiras meniu, leidziantis istrinti esama studenta"
+                        Clicked="OnRSClicked"
+                    IsVisible="true"
+                    />
+                <Button Grid.Row="2"
+                        Grid.Column="0"
+                    x:Name="AddLecturer"
+                    Text="Prideti destytoja"
+                    SemanticProperties.Description="Prideti destytoja i AIS"
+                    SemanticProperties.Hint="Paspaudus mygtuka atsiras meniu, leidziantis sukurti nauja destytoja"
+                        Clicked="OnALClicked"
+                    IsVisible="true"
+                    />
+                <Button Grid.Row="3"
+                        Grid.Column="0"
+                    x:Name="RemoveLecturer"
+                    Text="Istrinti destytoja"
+                    SemanticProperties.Description="Istrinti destytoja is AIS"
+                    SemanticProperties.Hint="Paspaudus mygtuka atsiras meniu, leidziantis istrinti esama destytoja"
+                        Clicked="OnRLClicked"
+                    IsVisible="true"
+                    />
+                <Button Grid.Row="4"
+                        Grid.Column="0"
+                    x:Name="EditGrade"
+                    Text="Redaguoti studento pazymi"
+                    SemanticProperties.Hint="Paspaudus mygtuka atsiras meniu, leidziantis redaguoti studento esama pazymi"
+                        Clicked="OnEGClicked"
+                    IsVisible="true"
+                    />
+                <Button Grid.Row="5"
+                        Grid.Column="0"
+                    x:Name="CreateGroup"
+                    Text="Sukurti grupe"
+                    SemanticProperties.Hint="Paspaudus mygtuka atsiras meniu, leidziantis sukurti nauja grupe"
+                        Clicked="OnCGClicked"
+                    IsVisible="true"
+                    />
+                <Button Grid.Row="6" 
+                        Grid.Column="0"
+                    x:Name="RemoveGroup"
+                    Text="Pasalinti grupe"
+                    SemanticProperties.Hint="Paspaudus mygtuka atsiras meniu, leidziantis sunaikinti esama grupe"
+                        Clicked="OnRGClicked"
+                    IsVisible="true"
+                    />
+                <Button Grid.Row="7"
+                        Grid.Column="0"
+                    x:Name="Back"
+                    Text="Grizti"
+                    SemanticProperties.Hint="Paspaudus mygtuka sugris administravimo panele"
+                        Clicked="OnBackClicked"
+                    IsVisible="false"
+    />
+                
+            </Grid>
+            
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

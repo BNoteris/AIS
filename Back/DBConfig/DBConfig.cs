@@ -47,9 +47,9 @@ namespace AIS.Back.DBConfig
 
         }
 
-        public void openConnectionExists()
+        public void openConnectionExists(string u_, string p_)
         {
-            string cs = string.Format("server=127.0.0.1;uid='{0}';password='{1}';database=ais", getUsername(), getPassword());
+            string cs = string.Format("server=127.0.0.1;uid='{0}';password='{1}';database=ais", u_, p_);
             try
             {
                 conn = new MySqlConnection();
