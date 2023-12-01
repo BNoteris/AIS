@@ -95,11 +95,64 @@ namespace AIS.Back.DBConfig
             return result;
         }
 
-        public void createQuerry(string v) {
+        public void createQuerry(string v, string u_, string p_) {
+
+            openConnectionExists(u_, p_);
 
             MySqlCommand cmd = new MySqlCommand(v, conn);
             MySqlDataReader rdr = cmd.ExecuteReader();
             rdr.Close();
+
+            closeConnection();
+        }
+
+        public DataTable transformToDT(List<List<object>> list, List<string> columnNames)
+        {
+            DataTable dt = new DataTable(); // sukuriamas DT atvaizduoti duomenis istrauktus is DB
+            foreach (var columnName in columnNames)
+            {
+                dt.Columns.Add(columnName); // Sukuriami stulpeliai dataTable'ui
+            }
+
+            foreach (var row in list)
+            {
+
+                var values = new object[row.Count]; // sukuriamas masyvas visos eilutes elementu (kiek eiluteje elementu, toks masyvo dydis)
+
+                for (int i = 0; i < row.Count; i++)
+                {
+                    values[i] = row[i];
+                }
+                dt.Rows.Add(values);
+            }
+
+            return dt;
+        }
+
+        public async Task<List<List<object>>> getData(string v, string u_, string p_)
+        {
+
+            openConnectionExists(u_, p_);
+
+            MySqlCommand cmd = new MySqlCommand(v, conn);
+            var rdr = await cmd.ExecuteReaderAsync(); // ERA - igalina ReadAsync skaityma duomenu
+
+            var mainList = new List<List<object>>();
+
+            while (await rdr.ReadAsync() ) // ReadAsync - nuskaito tolimesne eilute (row)
+            {
+                List<object> data = new List<object>();
+                for (int i = 0; i < rdr.FieldCount; i++) {  // FieldCount - column count
+
+                    data.Add(rdr.GetValue(i)); // GetValue paima column'o duomeni ir ideda i "temporary" data sarasa
+                }
+
+                mainList.Add(data); // temporary sarasas su vieno row duomenimis idedamas i main sarasa, kuriame visi duomenys accessible
+            }
+
+            closeConnection();
+
+            return mainList;//list;
         }
 
         public bool verifyUserExistance(string u_, string p_)

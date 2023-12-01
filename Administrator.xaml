@@ -4,17 +4,21 @@
              x:Class="AIS.Administrator"
              Title="">
     <ScrollView>
-    <VerticalStackLayout>
+        <VerticalStackLayout>
         <Label 
             Text="Sveiki prisijunge."
             VerticalOptions="Center" 
             HorizontalOptions="Center" 
             FontSize="Large"
             Margin="20"/>
+            
+            <!--MYGTUKU INTERFEISAS-->
+
+            <HorizontalStackLayout>
             <Grid 
                   x:Name="interfaceButtons"
-                  ColumnDefinitions="230, *"
-                  RowDefinitions="*, *, *, *, *, *, *, *"
+                  ColumnDefinitions="230, 500"
+                  RowDefinitions="47, 47, 47, 47, 47, 47, 47, 47"
                   Padding="50 "
                   RowSpacing="50"
                   VerticalOptions="Center"
@@ -87,10 +91,309 @@
                     SemanticProperties.Hint="Paspaudus mygtuka sugris administravimo panele"
                         Clicked="OnBackClicked"
                     IsVisible="false"
-    />
-                
+                />
+
             </Grid>
+
+            <!--STUDENTU PRIDEJIMO INTERFEISAS-->
+
+            <StackLayout>
+                
+                <Grid x:Name="interfaceAddStudent" IsVisible="false" HorizontalOptions="Center"
+                      RowDefinitions="*, *, *, *, *, *, *"
+                      ColumnDefinitions="*"
+                      Grid.Column="1">
+                      
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                        Text="Ivesti studento varda:"
+                        FontSize="Medium"
+                        TextDecorations="Underline"
+                        Margin="50"
+                        HorizontalOptions="Center"
+                        />
+                    <Entry Grid.Row="1"
+                           Grid.Column="1"
+                        x:Name="fNameEntry"
+                        Placeholder="Vardas"
+                        WidthRequest="300"
+                        />
+                    <Label Grid.Row="2"
+                           Grid.Column="1"
+                        Text="Ivesti studento pavarde:"
+                        FontSize="Medium"
+                        TextDecorations="Underline"
+                        Margin="50"
+                        HorizontalOptions="Center"
+                        />
+                    <Entry Grid.Row="3"
+                           Grid.Column="1"
+                        x:Name="lNameEntry"
+                        Placeholder="Pavarde"
+                        WidthRequest="300"
+                       />
+                        <Label Grid.Row="4"
+                           Grid.Column="1"
+                        Text="Pasirinkti studento grupe:"
+                        FontSize="Medium"
+                        TextDecorations="Underline"
+                        Margin="50"
+                        HorizontalOptions="Center"
+                           />
+                        <Picker x:Name="addStudentPicker"
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                Margin="50"
+                                
+                        />
+
+                        <Button Grid.Row="6"
+                                Grid.Column="1"
+                        x:Name="addStudentBtn"
+                        Text="Testi"
+                        Clicked="OnAddStudentBtnClicked"
+                        HorizontalOptions="Center"
+                        />
+                    </Grid>
+
+                </StackLayout>
             
-    </VerticalStackLayout>
+            <!--STUDENTU SALINIMO INTERFEISAS-->
+
+                <StackLayout>
+
+                    <Grid x:Name="interfaceRemoveStudent" IsVisible="false" HorizontalOptions="Center"
+                        RowDefinitions="*, *, *, *, *"
+                        ColumnDefinitions="*"
+                        Grid.Column="1">
+
+                        <Label Grid.Row="0"
+                               Grid.Column="1"
+                            Text="Pasirinkti grupe:"
+                            FontSize="Medium"
+                            TextDecorations="Underline"
+                            Margin="50"
+                            HorizontalOptions="Center"
+                            />
+                        <Entry Grid.Row="1"
+                               Grid.Column="1"
+                            x:Name="EntryTemp1"
+                            Placeholder="Temporary"
+                            WidthRequest="300"
+                            />
+                        <Label Grid.Row="2"
+                               Grid.Column="1"
+                            Text="Pasirinkti studenta:"
+                            FontSize="Medium"
+                            TextDecorations="Underline"
+                            Margin="50"
+                            HorizontalOptions="Center"
+                            />
+                        <Entry Grid.Row="3"
+                               Grid.Column="1"
+                            x:Name="TempEntry2"
+                            Placeholder="Temporary"
+                            WidthRequest="300"
+                            />
+                        
+                    </Grid>
+
+                </StackLayout>
+
+                <!--DESTYTOJO PRIDEJIMO INTERFEISAS-->
+
+                <StackLayout>
+
+                    <Grid x:Name="interfaceAddLecturer" IsVisible="false" HorizontalOptions="Center"
+                          RowDefinitions="*, *, *, *, *"
+                          ColumnDefinitions="*"
+                          Grid.Column="1">
+
+                        <Label Grid.Row="0"
+                               Grid.Column="1"
+                            Text="Ivesti destytojo varda:"
+                            FontSize="Medium"
+                            TextDecorations="Underline"
+                            Margin="50"
+                            HorizontalOptions="Center"
+                            />
+                        <Entry Grid.Row="1"
+                               Grid.Column="1"
+                        x:Name="fNameLEntry"
+                        Placeholder="Vardas"
+                        WidthRequest="300"
+                        />
+                        <Label Grid.Row="2"
+                               Grid.Column="1"
+                            Text="Ivesti destytojo pavarde:"
+                            FontSize="Medium"
+                            TextDecorations="Underline"
+                            Margin="50"
+                            HorizontalOptions="Center"
+                            />
+                        <Entry Grid.Row="3"
+                               Grid.Column="1"
+                        x:Name="lNameFEntry"
+                        Placeholder="Pavarde"
+                        WidthRequest="300"
+                            />
+                        <Label Grid.Row="4"
+                               Grid.Column="1"
+                        Text="Paskirti grupe:"
+                        FontSize="Medium"
+                        TextDecorations="Underline"
+                        Margin="50"
+                        HorizontalOptions="Center"
+                        />
+                    </Grid>
+
+                </StackLayout>
+
+                <!--DESTYTOJO SALINIMO INTERFEISAS-->
+
+                <StackLayout>
+
+                    <Grid x:Name="interfaceRemoveLecturer" IsVisible="false" HorizontalOptions="Center"
+                          RowDefinitions="*, *, *, *, *"
+                          ColumnDefinitions="*"
+                          Grid.Column="1">
+
+                        <Label Grid.Row="0"
+                               Grid.Column="1"
+                        Text="Pasirinkti destytoja:"
+                        FontSize="Medium"
+                        TextDecorations="Underline"
+                        Margin="50"
+                        HorizontalOptions="Center"
+                        />
+                        <Entry Grid.Row="1"
+                               Grid.Column="1"
+                        x:Name="EntryTemp"
+                        Placeholder="Temporary"
+                        WidthRequest="300"
+                        />
+                        
+                    </Grid>
+
+                </StackLayout>
+
+                <!--PAZYMIO REDAGAVIMO INTERFEISAS-->
+
+                <StackLayout>
+
+                    <Grid x:Name="interfaceEditGrade" IsVisible="false" HorizontalOptions="Center"
+                          RowDefinitions="*, *, *, *, *, *"
+                          ColumnDefinitions="*"
+                          Grid.Column="1">
+
+                        <Label Grid.Row="0"
+                               Grid.Column="1"
+                            Text="Pasirinkti grupe:"
+                            FontSize="Medium"
+                            TextDecorations="Underline"
+                            Margin="50"
+                            HorizontalOptions="Center"
+                        />
+                        <Entry Grid.Row="1"
+                               Grid.Column="1"
+                            x:Name="TempTemp"
+                            Placeholder="Temporary"
+                            WidthRequest="300"
+                            />
+                        <Label Grid.Row="2"
+                               Grid.Column="1"
+                            Text="Pasirinkti studenta:"
+                            FontSize="Medium"
+                            TextDecorations="Underline"
+                            Margin="50"
+                            HorizontalOptions="Center"
+                            />
+                        <Entry Grid.Row="3"
+                               Grid.Column="1"
+                               x:Name="TempTemp1"
+                               Placeholder="Temporary1"
+                               WidthRequest="300"
+                            />
+                        <Label Grid.Row="4"
+                               Grid.Column="1"
+                            Text="Pasirinkti pazymi:"
+                            FontSize="Medium"
+                            TextDecorations="Underline"
+                            Margin="50"
+                            HorizontalOptions="Center"
+                            />
+                        <Entry Grid.Row="5"
+                               Grid.Column="1"
+                            x:Name="TempTemp2"
+                            Placeholder="Temporary2"
+                            WidthRequest="300"
+                            />
+                    </Grid>
+
+                </StackLayout>
+
+                <!--GRUPES PRIDEJIMO INTERFEISAS-->
+
+                <StackLayout>
+
+                    <Grid x:Name="interfaceAddGroup" IsVisible="false" HorizontalOptions="Center"
+                          RowDefinitions="*, *, *, *, *"
+                          ColumnDefinitions="*"
+                          Grid.Column="1">
+
+                        <Label Grid.Row="0"
+                               Grid.Column="1"
+                            Text="Ivesti grupes pavadinima:"
+                            FontSize="Medium"
+                            TextDecorations="Underline"
+                            Margin="50"
+                            HorizontalOptions="Center"
+                            />
+                        <Entry Grid.Row="1"
+                               Grid.Column="1"
+                            x:Name="gNameLEntry"
+                            Placeholder="Pavadinimas"
+                            WidthRequest="300"
+                            />
+                        
+                    </Grid>
+
+                </StackLayout>
+
+                <!--GRUPES SALINIMO INTERFEISAS-->
+
+                <StackLayout>
+
+                    <Grid x:Name="interfaceRemoveGroup" IsVisible="false" HorizontalOptions="Center"
+                          RowDefinitions="*, *, *, *, *"
+                          ColumnDefinitions="*"
+                          Grid.Column="1">
+
+                        <Label Grid.Row="0"
+                               Grid.Column="1"
+                            Text="Pasirinkti grupe:"
+                            FontSize="Medium"
+                            TextDecorations="Underline"
+                            Margin="50"
+                            HorizontalOptions="Center"
+                            />
+                        <Entry Grid.Row="1"
+                               Grid.Column="1"
+                            x:Name="TempTempy"
+                            Placeholder="Temporary"
+                            WidthRequest="300"
+                            />
+
+                    </Grid>
+
+                </StackLayout>
+
+
+                
+
+
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+        
     </ScrollView>
 </ContentPage>
