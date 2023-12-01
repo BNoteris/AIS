@@ -1,0 +1,46 @@
+grades				grade_type			lecturers		groups
+
+gradeID				grade_typeID			lecturerID		groupID
+								firstName		groupName
+studentID			typeName			lastName
+lecturerID							groupID
+lectureID
+grade_typeID
+grade
+
+users				user_types
+
+userID				user_typeID
+username			typeName
+password
+firstName
+lastName
+user_typeID
+
+
+
+What can students do?
+
+They can view (select their grades). That is done by selecting a lecture that is assigned to them. That is done by viewing the lectures list that is on their user. Lectures list per user is visible.
+
+Lectures list per user -> Lectures list -> Selecting a lecture -> Viewing their grades
+
+Simplified:
+Since user is a part of a group, certain lectures will be assigned to certain groups.
+
+Even more simplified:
+
+Each lecture has a groupID
+
+That gives us:
+
+Lectures list per group -> Selecting a lecture by viewing user's group -> Viewing that user's grade
+
+WHBD:
+
+Generate a lectures list per group's ID
+Once you select a lecture, it will have to show your current grades and their types per studentID and lectureID.
+
+What we need:
+
+lectureID to have a groupID in order for us to see what lectures are assigned to a certain group.
