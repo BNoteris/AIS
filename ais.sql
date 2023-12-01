@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2023 at 10:34 PM
+-- Generation Time: Dec 01, 2023 at 02:43 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -58,6 +58,13 @@ CREATE TABLE `groups` (
   `groupName` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `groups`
+--
+
+INSERT INTO `groups` (`groupID`, `groupName`) VALUES
+(1, 'PI19');
+
 -- --------------------------------------------------------
 
 --
@@ -95,6 +102,13 @@ CREATE TABLE `student` (
   `lastName` varchar(50) NOT NULL,
   `groupID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`studentID`, `firstName`, `lastName`, `groupID`) VALUES
+(1, 'Jonas', 'Jonaitis', 1);
 
 -- --------------------------------------------------------
 
@@ -208,7 +222,7 @@ ALTER TABLE `grade_type`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `groupID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `groupID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `lecturer`
@@ -226,7 +240,7 @@ ALTER TABLE `lectures`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
