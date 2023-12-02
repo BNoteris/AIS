@@ -95,6 +95,24 @@ namespace AIS.Back.DBConfig
             return result;
         }
 
+        public string createQuerryString(string v, string u_, string p_)
+        {
+
+            openConnectionExists(u_, p_);
+
+            MySqlCommand cmd = new MySqlCommand(v, conn);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            string text = "";
+
+            if (rdr.Read())
+            {
+                text = rdr.GetString(0);
+            }
+
+            rdr.Close ();
+            return text;
+        }
+
         public void createQuerry(string v, string u_, string p_) {
 
             openConnectionExists(u_, p_);
@@ -194,5 +212,47 @@ namespace AIS.Back.DBConfig
             return userTypeID;
         }
 
+        public string getGradeTypeString (int gradeTypeID, string u_, string p_) {
+
+            string query = string.Format("SELECT typeName FROM ais.grade_type WHERE grade_type_ID = '{0}'", gradeTypeID);
+            string result = createQuerryString(query, u_, p_);
+
+            return result;
+        }
+
+        public bool checkIfRelative (string v, string u_, string p_)
+        {
+
+            openConnectionExists(u_, p_);
+
+            int existingNums = createQuerryInt(v);
+
+            if (existingNums > 0)
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        public string generateUser(string u_, string p_)
+        {
+
+            string generatedUser = "";
+
+            Random random = new Random();
+            int randomNumber = random.Next(1000000);
+
+            generatedUser = "s" + randomNumber.ToString();
+            if (!checkIfRelative(string.Format("SELECT DBuser from ais.users WHERE DBuser = '{0}'", generatedUser), u_, p_))
+            {
+
+                return generatedUser;
+            } else generateUser(u_, p_);
+
+            return generatedUser;
+
+        }
+
     }
+
 }

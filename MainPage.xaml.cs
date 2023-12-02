@@ -57,11 +57,12 @@ namespace AIS
 
                 if (exists)
                 {
+                    string DBuser = dB.createQuerryString(string.Format("SELECT DBuser FROM ais.users WHERE username = '{0}' AND password = '{1}'", username, password), "temp", "temp");
                     Debug.WriteLine("User exists");
                     int userTypeID = dB.getUserTypeID(username, password);
                     Debug.WriteLine("User type ID = " + userTypeID);
 
-                    _userService.Username = username;
+                    _userService.Username = DBuser;
                     _userService.Password = password;
                     
                     switch (userTypeID)
