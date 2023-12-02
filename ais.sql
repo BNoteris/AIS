@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2023 at 02:43 AM
+-- Generation Time: Dec 02, 2023 at 04:06 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -63,7 +63,8 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`groupID`, `groupName`) VALUES
-(1, 'PI19');
+(1, 'PI19'),
+(4, 'KS22');
 
 -- --------------------------------------------------------
 
@@ -75,6 +76,18 @@ CREATE TABLE `lecturer` (
   `lecturerID` int(11) NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
+  `groupID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lecturergroups`
+--
+
+CREATE TABLE `lecturergroups` (
+  `lecturerGroupID` int(11) NOT NULL,
+  `lecturerID` int(11) NOT NULL,
   `groupID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -103,13 +116,6 @@ CREATE TABLE `student` (
   `groupID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `student`
---
-
-INSERT INTO `student` (`studentID`, `firstName`, `lastName`, `groupID`) VALUES
-(1, 'Jonas', 'Jonaitis', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -120,6 +126,7 @@ CREATE TABLE `users` (
   `userID` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
+  `DBuser` varchar(50) NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
   `user_typeID` int(11) NOT NULL
@@ -129,8 +136,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userID`, `username`, `password`, `firstName`, `lastName`, `user_typeID`) VALUES
-(1, 'root', '12345678', 'Emilis', 'Borusas', 1);
+INSERT INTO `users` (`userID`, `username`, `password`, `DBuser`, `firstName`, `lastName`, `user_typeID`) VALUES
+(13, 'Emilis', 'Borusas', 's046938', 'Emilis', 'Borusas', 1);
 
 -- --------------------------------------------------------
 
@@ -179,6 +186,12 @@ ALTER TABLE `lecturer`
   ADD PRIMARY KEY (`lecturerID`);
 
 --
+-- Indexes for table `lecturergroups`
+--
+ALTER TABLE `lecturergroups`
+  ADD PRIMARY KEY (`lecturerGroupID`);
+
+--
 -- Indexes for table `lectures`
 --
 ALTER TABLE `lectures`
@@ -222,13 +235,19 @@ ALTER TABLE `grade_type`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `groupID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `groupID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `lecturer`
 --
 ALTER TABLE `lecturer`
-  MODIFY `lecturerID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `lecturerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `lecturergroups`
+--
+ALTER TABLE `lecturergroups`
+  MODIFY `lecturerGroupID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `lectures`
@@ -240,13 +259,13 @@ ALTER TABLE `lectures`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `user_types`
