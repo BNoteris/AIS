@@ -167,9 +167,10 @@ public partial class Lecturer : ContentPage
                 {
 
                     result = await DisplayPromptAsync("Pazymio keitimas", "Iveskite nauja pazymi", accept: "Patvirtinti", cancel: "Atsaukti");
-                    resultInt = Int32.Parse(result);
+                    //resultInt = Int32.Parse(result);
+                    bool checkIfInt = int.TryParse(result, out resultInt); 
 
-                    if (resultInt > 0 && resultInt <= 10)
+                    if (resultInt > 0 && resultInt <= 10 && checkIfInt)
                     {
 
                         dB.createQuerry(string.Format("UPDATE ais.grades SET grade = '{0}' WHERE gradeID = '{1}'", resultInt, id), MainPage._userService.Username, MainPage._userService.Password);
@@ -187,6 +188,7 @@ public partial class Lecturer : ContentPage
                 } while (resultInt <= 0 && resultInt > 10);
 
             }
+            else;
         }
         else await DisplayAlert("Klaida", "Patikrinkite ar pasirinkote visus parametrus", "Gerai");
     }
