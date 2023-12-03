@@ -26,6 +26,7 @@ Global
 		{8B8810AB-BCA6-42B9-829D-BF289A207AF7}.FullRelease|Any CPU.Deploy.0 = FullRelease|Any CPU
 		{8B8810AB-BCA6-42B9-829D-BF289A207AF7}.FullRelease|x64.ActiveCfg = FullRelease|x64
 		{8B8810AB-BCA6-42B9-829D-BF289A207AF7}.FullRelease|x64.Build.0 = FullRelease|x64
+		{8B8810AB-BCA6-42B9-829D-BF289A207AF7}.FullRelease|x64.Deploy.0 = FullRelease|x64
 		{8B8810AB-BCA6-42B9-829D-BF289A207AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B8810AB-BCA6-42B9-829D-BF289A207AF7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B8810AB-BCA6-42B9-829D-BF289A207AF7}.Release|Any CPU.Deploy.0 = Release|Any CPU

@@ -956,11 +956,11 @@ public partial class Administrator : ContentPage
 
             int studentID = Int32.Parse(selectedItem.Value);
 
-            string query = string.Format("SELECT gradeID, grade, grade_typeID FROM ais.grades WHERE studentID = '{0}'", studentID);
+            string query = string.Format("SELECT gradeID, grade, grade_typeID, lectureID FROM ais.grades WHERE studentID = '{0}'", studentID);
             DBConfig dB = new DBConfig();
             var gradeListUnusable = await dB.getData(query, MainPage._userService.Username, MainPage._userService.Password);
 
-            DataTable dT = dB.transformToDT(gradeListUnusable, new List<string> { "gradeID", "grade", "grade_typeID" });
+            DataTable dT = dB.transformToDT(gradeListUnusable, new List<string> { "gradeID", "grade", "grade_typeID", "lectureID" });
 
             List<CustomPickerItem> pickerItems = new List<CustomPickerItem>();
 
@@ -970,10 +970,12 @@ public partial class Administrator : ContentPage
                 string value = row["gradeID"].ToString();
                 string displayText1 = row["grade"].ToString();
                 string displayText2 = row["grade_typeID"].ToString();
+                string lectureName = dB.createQuerryString(string.Format("SELECT lectureName FROM ais.lectures WHERE lectureID = '{0}'", Int32.Parse(row["lectureID"].ToString())), 
+                    MainPage._userService.Username, MainPage._userService.Password);
 
                 int gradeID = Int32.Parse(displayText2);
                 displayText2 = dB.getGradeTypeString(gradeID, MainPage._userService.Username, MainPage._userService.Password);
-                string displayText = displayText1 + " " + displayText2;
+                string displayText = lectureName + " - " + displayText2 + " " + displayText1;
 
                 pickerItems.Add(new CustomPickerItem(displayText, value));
             };
