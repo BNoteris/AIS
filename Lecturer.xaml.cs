@@ -389,6 +389,7 @@ public partial class Lecturer : ContentPage
             };
 
             editGradePicker2.ItemsSource = pickerItems;
+            
 
         }
     }
@@ -422,6 +423,7 @@ public partial class Lecturer : ContentPage
             };
 
             editGradePicker3.ItemsSource = pickerItems;
+            editGradePicker4.SelectedItem = null;
 
         }
     }
@@ -430,13 +432,15 @@ public partial class Lecturer : ContentPage
     {
 
         CustomPickerItem selectedItem = (CustomPickerItem)editGradePicker3.SelectedItem;
+        CustomPickerItem selectedLecture = (CustomPickerItem)editGradePicker2.SelectedItem;
 
-        if (selectedItem != null)
+        if (selectedItem != null && selectedLecture != null)
         {
 
             int studentID = Int32.Parse(selectedItem.Value);
+            int lectureID = Int32.Parse(selectedLecture.Value);
 
-            string query = string.Format("SELECT gradeID, grade, grade_typeID FROM ais.grades WHERE studentID = '{0}'", studentID);
+            string query = string.Format("SELECT gradeID, grade, grade_typeID FROM ais.grades WHERE studentID = '{0}' AND lectureID = '{1}'", studentID, lectureID);
             DBConfig dB = new DBConfig();
             var gradeListUnusable = await dB.getData(query, MainPage._userService.Username, MainPage._userService.Password);
 
