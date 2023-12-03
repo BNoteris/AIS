@@ -14,8 +14,21 @@ public partial class Administrator : ContentPage
     public Administrator()
     {
         InitializeComponent();
+        currentlyLoggedIn();
 
+    }
 
+    private void currentlyLoggedIn()
+    {
+
+        string logged = "Prisijunges kaip " + MainPage._userService.firstName + " " + MainPage._userService.lastName;
+        loggedIn.Text = logged;
+    }
+
+    private async void onLogoutClicked(object sender, EventArgs e)
+    {
+
+        await Shell.Current.Navigation.PushAsync(new MainPage());
     }
     private void OnASClicked(object sender, EventArgs e)
     {
@@ -28,13 +41,16 @@ public partial class Administrator : ContentPage
         EditGrade.IsVisible = false;
         CreateGroup.IsVisible = false;
         RemoveGroup.IsVisible = false;
+        RemoveLecture.IsVisible = false;
+        AssignLecture.IsVisible = false;
+        AddLecture.IsVisible = false;
         Back.IsVisible = true;
         interfaceAddStudent.IsVisible = true;
         AddStudent.IsEnabled = false;
 
         groupList();
 
-        Debug.WriteLine("Testing userSerive visibility, username is " + MainPage._userService.Username + " password is: " + MainPage._userService.Password);
+        //Debug.WriteLine("Testing userSerive visibility, username is " + MainPage._userService.Username + " password is: " + MainPage._userService.Password);
 
         //Alignment transform
 
@@ -54,6 +70,9 @@ public partial class Administrator : ContentPage
         EditGrade.IsVisible = false;
         CreateGroup.IsVisible = false;
         RemoveGroup.IsVisible = false;
+        RemoveLecture.IsVisible = false;
+        AssignLecture.IsVisible = false;
+        AddLecture.IsVisible = false;
         Back.IsVisible = true;
         interfaceRemoveStudent.IsVisible = true;
         RemoveStudent.IsEnabled = false;
@@ -81,6 +100,9 @@ public partial class Administrator : ContentPage
         EditGrade.IsVisible = false;
         CreateGroup.IsVisible = false;
         RemoveGroup.IsVisible = false;
+        RemoveLecture.IsVisible = false;
+        AssignLecture.IsVisible = false;
+        AddLecture.IsVisible = false;
         Back.IsVisible = true;
         interfaceAddLecturer.IsVisible = true;
         AddLecturer.IsEnabled = false;
@@ -105,6 +127,9 @@ public partial class Administrator : ContentPage
         EditGrade.IsVisible = false;
         CreateGroup.IsVisible = false;
         RemoveGroup.IsVisible = false;
+        RemoveLecture.IsVisible = false;
+        AssignLecture.IsVisible = false;
+        AddLecture.IsVisible = false;
         Back.IsVisible = true;
         interfaceRemoveLecturer.IsVisible = true;
         RemoveLecturer.IsEnabled = false;
@@ -129,6 +154,9 @@ public partial class Administrator : ContentPage
         AddStudent.IsVisible = false;
         CreateGroup.IsVisible = false;
         RemoveGroup.IsVisible = false;
+        RemoveLecture.IsVisible = false;
+        AssignLecture.IsVisible = false;
+        AddLecture.IsVisible = false;
         Back.IsVisible = true;
         interfaceEditGrade.IsVisible = true;
         EditGrade.IsEnabled = false;
@@ -153,6 +181,9 @@ public partial class Administrator : ContentPage
         AddStudent.IsVisible = false;
         RemoveGroup.IsVisible = false;
         EditGrade.IsVisible = false;
+        RemoveLecture.IsVisible = false;
+        AssignLecture.IsVisible = false;
+        AddLecture.IsVisible = false;
         Back.IsVisible = true;
         interfaceAddGroup.IsVisible = true;
         CreateGroup.IsEnabled = false;
@@ -176,6 +207,9 @@ public partial class Administrator : ContentPage
         CreateGroup.IsVisible = false;
         EditGrade.IsVisible = false;
         Back.IsVisible = true;
+        RemoveLecture.IsVisible = false;
+        AssignLecture.IsVisible = false;
+        AddLecture.IsVisible = false;
         interfaceRemoveGroup.IsVisible = true;
         RemoveGroup.IsEnabled = false;
 
@@ -189,6 +223,86 @@ public partial class Administrator : ContentPage
 
     }
 
+    private void OnAddLectureClicked(object sender, EventArgs e)
+    {
+
+        //Editing visibility
+
+        RemoveStudent.IsVisible = false;
+        AddLecturer.IsVisible = false;
+        RemoveLecturer.IsVisible = false;
+        AddStudent.IsVisible = false;
+        CreateGroup.IsVisible = false;
+        EditGrade.IsVisible = false;
+        RemoveLecture.IsVisible = false;
+        AssignLecture.IsVisible = false;
+        RemoveGroup.IsVisible = false;
+        Back.IsVisible = true;
+        AddLecture.IsEnabled = false;
+
+        interfaceAddLecture.IsVisible = true;
+
+        //Alignment transform
+
+        interfaceAddLecture.HorizontalOptions = LayoutOptions.Center;
+    }
+
+    private void OnRemoveLectureClicked(object sender, EventArgs e)
+    {
+
+        //Editing visibility
+
+        RemoveStudent.IsVisible = false;
+        AddLecturer.IsVisible = false;
+        RemoveLecturer.IsVisible = false;
+        AddStudent.IsVisible = false;
+        CreateGroup.IsVisible = false;
+        EditGrade.IsVisible = false;
+        AddLecture.IsVisible = false;
+        AssignLecture.IsVisible = false;
+        RemoveGroup.IsVisible = false;
+        Back.IsVisible = true;
+        RemoveLecture.IsEnabled = false;
+
+        interfaceRemoveLecture.IsVisible = true;
+
+        lecturesList();
+
+        //Alignment transform
+
+        interfaceButtons.HorizontalOptions = LayoutOptions.Fill;
+        interfaceRemoveLecture.HorizontalOptions = LayoutOptions.Center;
+    }
+
+    private void OnAssignLectureClicked(object sender, EventArgs e)
+    {
+
+        //Editing visibility
+
+        RemoveStudent.IsVisible = false;
+        AddLecturer.IsVisible = false;
+        RemoveLecturer.IsVisible = false;
+        AddStudent.IsVisible = false;
+        CreateGroup.IsVisible = false;
+        EditGrade.IsVisible = false;
+        AddLecture.IsVisible = false;
+        RemoveLecture.IsVisible = false;
+        RemoveGroup.IsVisible = false;
+        Back.IsVisible = true;
+        AssignLecture.IsEnabled = false;
+
+        interfaceAssignLecture.IsVisible = true;
+
+        lecturesList();
+        groupList();
+        lecturerList();
+
+        //Alignment transform
+
+        interfaceButtons.HorizontalOptions = LayoutOptions.Fill;
+        interfaceAssignLecture.HorizontalOptions = LayoutOptions.Center;
+    }
+
     private void OnBackClicked(object sender, EventArgs e)
     {
         //Editing visibility
@@ -200,6 +314,9 @@ public partial class Administrator : ContentPage
         EditGrade.IsVisible = true;
         CreateGroup.IsVisible = true;
         RemoveGroup.IsVisible = true;
+        AddLecture.IsVisible = true;
+        RemoveLecture.IsVisible = true;
+        AssignLecture.IsVisible = true;
         Back.IsVisible = false;
 
         //Editing functionality
@@ -211,6 +328,9 @@ public partial class Administrator : ContentPage
         EditGrade.IsEnabled = true;
         CreateGroup.IsEnabled = true;
         RemoveGroup.IsEnabled = true;
+        AddLecture.IsEnabled = true;
+        RemoveLecture.IsEnabled = true;
+        AssignLecture.IsEnabled = true;
 
 
         //Interfaces visibility
@@ -222,6 +342,9 @@ public partial class Administrator : ContentPage
         interfaceEditGrade.IsVisible = false;
         interfaceAddGroup.IsVisible = false;
         interfaceRemoveGroup.IsVisible = false;
+        interfaceAddLecture.IsVisible = false;
+        interfaceRemoveLecture.IsVisible = false;
+        interfaceAssignLecture.IsVisible = false;
 
         //Alignment transform
 
@@ -233,6 +356,8 @@ public partial class Administrator : ContentPage
 
 
     }
+
+                                                                                            // BUTTONS IN INTERFACE FUNCTIONALITY \/ BEGIN
 
     private async void OnAddStudentBtnClicked(object sender, EventArgs e)
     {
@@ -263,7 +388,7 @@ public partial class Administrator : ContentPage
 
                     int id = Int32.Parse(selectedItem.Value);
 
-                    Debug.WriteLine("Testuojami duomenys. Studento vardas: " + fName + " studento pavarde: " + lName + " studento grupe: " + id);
+                    //Debug.WriteLine("Testuojami duomenys. Studento vardas: " + fName + " studento pavarde: " + lName + " studento grupe: " + id);
 
                     DBConfig dB = new DBConfig();
 
@@ -275,6 +400,10 @@ public partial class Administrator : ContentPage
                     dB.createQuerry(string.Format("CREATE USER '{0}' IDENTIFIED BY '{1}'", newUser, lName), MainPage._userService.Username, MainPage._userService.Password);
                     dB.createQuerry(string.Format("GRANT SELECT ON ais.grades TO '{0}'", newUser), MainPage._userService.Username, MainPage._userService.Password);
                     dB.createQuerry(string.Format("GRANT SELECT ON ais.lectures TO '{0}'", newUser), MainPage._userService.Username, MainPage._userService.Password);
+                    dB.createQuerry(string.Format("GRANT SELECT ON ais.lecturer TO '{0}'", newUser), MainPage._userService.Username, MainPage._userService.Password);
+                    dB.createQuerry(string.Format("GRANT SELECT ON ais.grade_type TO '{0}'", newUser), MainPage._userService.Username, MainPage._userService.Password);
+                    dB.createQuerry(string.Format("GRANT SELECT ON ais.student TO '{0}'", newUser), MainPage._userService.Username, MainPage._userService.Password);
+                    dB.createQuerry(string.Format("GRANT SELECT ON ais.lecturergroups TO '{0}'", newUser), MainPage._userService.Username, MainPage._userService.Password);
 
                     resetPickers();
                     groupList();
@@ -350,20 +479,21 @@ public partial class Administrator : ContentPage
             if (answer)
             {
 
-                CustomPickerItem selectedItem = (CustomPickerItem)addLecturerPicker.SelectedItem;
-
-                int id = Int32.Parse(selectedItem.Value);
-
                 DBConfig dB = new DBConfig();
 
                 string newUser = dB.generateUser(MainPage._userService.Username, MainPage._userService.Password);
 
-                dB.createQuerry(string.Format("INSERT INTO ais.lecturer (firstName, lastName, groupID) VALUES ('{0}', '{1}', '{2}')", fName, lName, id), MainPage._userService.Username, MainPage._userService.Password);
+                dB.createQuerry(string.Format("INSERT INTO ais.lecturer (firstName, lastName) VALUES ('{0}', '{1}')", fName, lName), MainPage._userService.Username, MainPage._userService.Password);
                 dB.createQuerry(string.Format("INSERT INTO ais.users (username, password, DBuser, firstName, lastName, user_typeID) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')"
                     , new object[6] { fName, lName, newUser, fName, lName, 2 }), MainPage._userService.Username, MainPage._userService.Password);
                 dB.createQuerry(string.Format("CREATE USER '{0}' IDENTIFIED BY '{1}'", newUser, lName), MainPage._userService.Username, MainPage._userService.Password);
                 dB.createQuerry(string.Format("GRANT SELECT, UPDATE, INSERT ON ais.grades TO '{0}'", newUser), MainPage._userService.Username, MainPage._userService.Password);
                 dB.createQuerry(string.Format("GRANT SELECT ON ais.lectures TO '{0}'", newUser), MainPage._userService.Username, MainPage._userService.Password);
+                dB.createQuerry(string.Format("GRANT SELECT ON ais.student TO '{0}'", newUser), MainPage._userService.Username, MainPage._userService.Password);
+                dB.createQuerry(string.Format("GRANT SELECT ON ais.lecturer TO '{0}'", newUser), MainPage._userService.Username, MainPage._userService.Password);
+                dB.createQuerry(string.Format("GRANT SELECT ON ais.groups TO '{0}'", newUser), MainPage._userService.Username, MainPage._userService.Password);
+                dB.createQuerry(string.Format("GRANT SELECT ON ais.lecturergroups TO '{0}'", newUser), MainPage._userService.Username, MainPage._userService.Password);
+                dB.createQuerry(string.Format("GRANT SELECT ON ais.grade_type TO '{0}'", newUser), MainPage._userService.Username, MainPage._userService.Password);
 
                 resetPickers();
                 groupList();
@@ -436,9 +566,9 @@ public partial class Administrator : ContentPage
                     if (resultInt > 0 && resultInt <= 10)
                     {
 
-                        dB.createQuerry(string.Format("UPDATE ais.grade SET grade = '{0}' gradeID = '{1}'", resultInt, id), MainPage._userService.Username, MainPage._userService.Password);
+                        dB.createQuerry(string.Format("UPDATE ais.grades SET grade = '{0}' WHERE gradeID = '{1}'", resultInt, id), MainPage._userService.Username, MainPage._userService.Password);
 
-                        await DisplayAlert("Patvirtinimas", "Destytojas istrintas is akademines informacines sistemos", "Gerai");
+                        await DisplayAlert("Patvirtinimas", "Pazymys atnaujintas", "Gerai");
                     }
                     else
 
@@ -500,18 +630,12 @@ public partial class Administrator : ContentPage
             int id = Int32.Parse(selectedItem.Value);
 
             string queryCheckForStudents = string.Format("SELECT COUNT(*) FROM ais.student WHERE groupID = '{0}'", id);
-            string queryCheckForLecturers = string.Format("SELECT COUNT(*) FROM ais.lecturer WHERE groupID = '{0}'", id);
 
             if (dB.checkIfRelative(queryCheckForStudents, MainPage._userService.Username, MainPage._userService.Password))
             {
                 await DisplayAlert("Klaida", "Sioje grupeje egzistuoja studentu, todel grupes trynimas negalimas", "Gerai");
 
-            }
-            else if (dB.checkIfRelative(queryCheckForLecturers, MainPage._userService.Username, MainPage._userService.Password))
-            {
-
-                await DisplayAlert("Klaida", "Sioje grupeje egzistuoja destytoju, todel grupes trynimas negalimas", "Gerai");
-            }
+            } 
             else
             {
 
@@ -534,6 +658,111 @@ public partial class Administrator : ContentPage
 
     }
 
+    private async void OnLectureCreateBtnClicked(object sender, EventArgs e)
+    {
+
+        var lNameEntry = FindByName("lectureNameEntry") as Entry;
+        string lName = lNameEntry.Text;
+
+        DBConfig dB = new DBConfig();
+        bool checkName = dB.checkIfRelative(string.Format("SELECT COUNT(*) FROM ais.lectures WHERE lectureName = '{0}'", lName), MainPage._userService.Username, MainPage._userService.Password);
+        
+        if (lName == null || lName == "") {
+
+            await DisplayAlert("Klaida", "Neivestas paskaitos pavadinimas", "Gerai");
+        }
+
+        else if (checkName)
+        {
+
+            await DisplayAlert("Klaida", "Tokia paskaita jau egzistuoja", "Gerai");
+        }
+        else {
+
+            bool answer = await DisplayAlert("Patvirtinimas", "Ar tikrai norite sukurti sia paskaita?", "Taip", "Ne");
+
+            if (answer)
+            {
+
+                dB.createQuerry(string.Format("INSERT INTO ais.lectures (lectureName) VALUES ('{0}')", lName), MainPage._userService.Username, MainPage._userService.Password);
+
+                await DisplayAlert("Patvirtinimas", "Paskaita sukurta", "Gerai");
+            }
+        }
+    }
+
+    private async void OnLectureRemoveBtnClicked(object sender, EventArgs e)
+    {
+
+        CustomPickerItem pickedItem = (CustomPickerItem)lectureRemovePicker.SelectedItem;
+
+
+        if (pickedItem != null)
+        {
+            bool answer = await DisplayAlert("Patvirtinimas", "Ar tikrai norite istrinti sia paskaita? Istrindami ja, istrinsite ir visiems studentams, priskirtiems jai", "Taip", "Ne");
+
+            if (answer)
+            {
+
+                int id = Int32.Parse(pickedItem.Value);
+
+                DBConfig dB = new DBConfig();
+                dB.createQuerry(string.Format("DELETE FROM ais.lectures WHERE lectureID = '{0}'", id), MainPage._userService.Username, MainPage._userService.Password);
+                dB.createQuerry(string.Format("DELETE FROM ais.lecturergroups WHERE lectureID = '{0}'", id), MainPage._userService.Username, MainPage._userService.Password);
+
+                await DisplayAlert("Patvirtinimas", "Paskaita istrinta", "Gerai");
+
+                resetPickers();
+                lecturesList();
+            }
+        }
+        else await DisplayAlert("Klaida", "Nepasirinkta jokia paskaita", "Gerai");
+    }
+
+    private async void OnAssignLectureBtnClicked(object sender, EventArgs e)
+    {
+
+        CustomPickerItem selectedLecture = (CustomPickerItem)assignLecturePicker1.SelectedItem;
+        CustomPickerItem selectedGroup = (CustomPickerItem)assignLecturePicker2.SelectedItem;
+        CustomPickerItem selectedLecturer = (CustomPickerItem)assignLecturePicker3.SelectedItem;
+
+        if (selectedLecture != null && selectedGroup != null && selectedLecturer != null)
+        {
+
+            int lectureID = Int32.Parse(selectedLecture.Value);
+            int groupID = Int32.Parse(selectedGroup.Value);
+            int lecturerID = Int32.Parse(selectedLecturer.Value);
+            DBConfig dB = new DBConfig();
+
+            bool checkForRepeating = dB.checkIfRelative(string.Format("SELECT COUNT(*) FROM ais.lecturergroups WHERE lectureID = '{0}' AND lecturerID = '{1}' AND groupID = '{2}'", lectureID, lecturerID, groupID), 
+                MainPage._userService.Username, MainPage._userService.Password);
+
+            if (!checkForRepeating)
+            {
+
+                bool answer = await DisplayAlert("Patvirtinimas", "Ar tikrai norite sia paskaita priskirti pasirinktai grupei bei destytojui?", "Taip", "Ne");
+
+                if (answer)
+                {
+
+
+                    dB.createQuerry(string.Format("INSERT INTO ais.lecturergroups (lectureID, lecturerID, groupID) VALUES ('{0}', '{1}', '{2}')", lectureID, lecturerID, groupID), MainPage._userService.Username, MainPage._userService.Password);
+
+                    await DisplayAlert("Patvirtinimas", "Paskaita priskirta grupei bei destytojui", "Gerai");
+                }
+            } else if (checkForRepeating)
+            {
+
+                await DisplayAlert("Klaida", "Destytojas jau paskirtas siai paskaitai siai grupei", "Gerai");
+            }
+        }
+        else await DisplayAlert("Klaida", "Kazkuris laukas yra tuscias, perziurekite parametrus", "Gerai");
+    }
+
+                                                                            // BUTTONS IN INTERFACE FUNCTIONALITY /\ END
+
+                                                                            // FUNCTIONALITY, DROP-DOWN LISTS, DATATABLE CONVERSIONS \/ BEGIN
+
     private void resetPickers()
     {
         groupRemovePicker.ItemsSource = null;
@@ -544,7 +773,6 @@ public partial class Administrator : ContentPage
         editGradePicker3.ItemsSource = null;
         addStudentPicker.ItemsSource = null;
         removeStudentPicker1.ItemsSource = null;
-        addLecturerPicker.ItemsSource = null;
 
     }
 
@@ -570,9 +798,33 @@ public partial class Administrator : ContentPage
 
         addStudentPicker.ItemsSource = pickerItems;
         removeStudentPicker1.ItemsSource = pickerItems;
-        addLecturerPicker.ItemsSource = pickerItems;
         editGradePicker1.ItemsSource = pickerItems;
         groupRemovePicker.ItemsSource = pickerItems;
+        assignLecturePicker2.ItemsSource = pickerItems;
+    }
+
+    private async void lecturesList()
+    {
+        string query = "SELECT lectureID, lectureName FROM ais.lectures";
+        DBConfig dB = new DBConfig();
+        var lectureListUnusable = await dB.getData(query, MainPage._userService.Username, MainPage._userService.Password);
+        DataTable dT = dB.transformToDT(lectureListUnusable, new List<string> { "lectureID", "lectureName" });
+
+
+        List<CustomPickerItem> pickerItems = new List<CustomPickerItem>();
+
+        foreach (DataRow row in dT.Rows)
+
+        {
+            string value = row["lectureID"].ToString();
+            string displayText = row["lectureName"].ToString();
+
+
+            pickerItems.Add(new CustomPickerItem(displayText, value));
+        };
+
+        lectureRemovePicker.ItemsSource = pickerItems;
+        assignLecturePicker1.ItemsSource = pickerItems;
     }
 
     private async void lecturerList()
@@ -598,6 +850,7 @@ public partial class Administrator : ContentPage
         };
 
         removeLecturerPicker.ItemsSource = pickerItems;
+        assignLecturePicker3.ItemsSource = pickerItems;
     }
 
     //private async void studentListPerGroup()

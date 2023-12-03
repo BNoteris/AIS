@@ -4,9 +4,107 @@
              x:Class="AIS.Student"
              Title="">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <FlexLayout FlowDirection="LeftToRight">
+            <Label 
+            Text="Sveiki prisijungę."
+            FontSize="Large"
+            Margin="10"
+            FlexLayout.Grow="1"
+            HeightRequest="50"
+            />
+            <Label  x:Name="loggedIn"
+            HorizontalOptions="End"
+            Margin="10"
+            FontSize="Large"
+            HeightRequest="50"
+            />
+            <Button x:Name="logOut"
+            WidthRequest="200"
+            Text="Atsijungti"
+            FontSize="Medium"
+            HeightRequest="50"
+            Margin="10"
+            BackgroundColor="SlateGray"
+            TextColor="White"
+            Clicked="onLogoutClicked"
+            />
+        </FlexLayout>
+
+        <!--MYGTUKU INTERFEISAS-->
+
+        <HorizontalStackLayout>
+            <Grid 
+                x:Name="interfaceButtons"
+                ColumnDefinitions="230, 500"
+                RowDefinitions="47, 47, 47, 47"
+                Padding="50"
+                RowSpacing="20"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+
+                <Button Grid.Row="0"
+                        Grid.Column="0"
+                        x:Name="ViewGrade"
+                        Text="Peržiūrėti įverčius"
+                        SemanticProperties.Description="Prideti nauja ivertinima i AIS"
+                        SemanticProperties.Hint="Paspaudus mygtuka atsiras meniu, leidziantis perziureti esamus ivercius"
+                        Clicked="OnVGClicked"
+                        IsVisible="true"
+                />
+                <Button Grid.Row="3"
+                        Grid.Column="0"
+                        x:Name="Back"
+                        Text="Grizti"
+                        SemanticProperties.Hint="Paspaudus mygtuka sugris studento panele"
+                        Clicked="OnBackClicked"
+                        IsVisible="false"
+                />
+
+            </Grid>
+
+            <!--PAZYMIO PRIDEJIMO INTERFEISAS-->
+
+            <StackLayout>
+
+                <Grid x:Name="interfaceViewGrades" IsVisible="false" HorizontalOptions="Center"
+                    RowDefinitions="*, *, *, *"
+                    ColumnDefinitions="*"
+                    Grid.Column="1">
+
+                    <Label  Grid.Row="0"
+                            Grid.Column="1"
+                            Text="Pasirinkti paskaitą:"
+                            FontSize="Medium"
+                            TextDecorations="Underline"
+                            Margin="20"
+                            HorizontalOptions="Center"
+                    />
+                    <Picker Grid.Row="1"
+                            Grid.Column="1"
+                            x:Name="viewGradePicker1"
+                            SelectedIndexChanged="OnViewGradePicker1Index"
+                            WidthRequest="300"
+                            Margin="20"
+                    />
+                    <Label  Grid.Row="2"
+                            Grid.Column="1"
+                            Text="Įvertinimai:"
+                            FontSize="Medium"
+                            TextDecorations="Underline"
+                            Margin="20"
+                            HorizontalOptions="Center"
+                    />
+                    <ListView Grid.Row="3"
+                            Grid.Column="1"
+                            x:Name="viewGradeList1"
+                            Margin="20"
+                            HorizontalOptions="Center"
+                            Scale="1.5"
+                            
+                    />
+                    
+                </Grid>
+            </StackLayout>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

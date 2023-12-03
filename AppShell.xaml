@@ -14,11 +14,6 @@
 
     <ShellContent
         Title=""
-        ContentTemplate="{DataTemplate local:TestPage}"
-        Route="TestPage" />
-
-    <ShellContent
-        Title=""
         ContentTemplate="{DataTemplate local:Student}"
         Route="Student" />
     

@@ -42,7 +42,7 @@ namespace AIS.Back.DBConfig
             }
             catch (MySqlException ex)
             {
-                Debug.WriteLine(ex.Message);
+                //Debug.WriteLine(ex.Message);
             }
 
         }
@@ -58,7 +58,7 @@ namespace AIS.Back.DBConfig
             }
             catch (MySqlException ex)
             {
-                Debug.WriteLine(ex.Message);
+                //Debug.WriteLine(ex.Message);
             }
 
         }
@@ -74,12 +74,14 @@ namespace AIS.Back.DBConfig
                 }
             }catch (MySqlException ex)
             {
-                Debug.WriteLine("Error closing database connection: " + ex.Message);
+                //Debug.WriteLine("Error closing database connection: " + ex.Message);
             }
         }
 
-        public int createQuerryInt(string v)
+        public int createQuerryInt(string v, string u_, string p_)
         {
+            openConnectionExists(u_, p_);
+
             MySqlCommand cmd = new MySqlCommand(v, conn);
             MySqlDataReader rdr = cmd.ExecuteReader();
             int result = 0;
@@ -91,6 +93,8 @@ namespace AIS.Back.DBConfig
             }
 
             rdr.Close();
+
+            closeConnection();
 
             return result;
         }
@@ -110,6 +114,8 @@ namespace AIS.Back.DBConfig
             }
 
             rdr.Close ();
+
+            closeConnection();
             return text;
         }
 
@@ -184,7 +190,7 @@ namespace AIS.Back.DBConfig
             }
 
             string query = string.Format("SELECT COUNT(*) FROM ais.users WHERE username = '{0}' AND password = '{1}'", u_, p_);
-            int userCount = createQuerryInt(query);
+            int userCount = createQuerryInt(query, "temp", "temp");
 
             closeConnection();
 
@@ -205,7 +211,7 @@ namespace AIS.Back.DBConfig
             }
 
             string query = string.Format("SELECT user_typeID FROM ais.users WHERE username = '{0}' AND password = '{1}'", u_, p_);
-            int userTypeID = createQuerryInt(query);
+            int userTypeID = createQuerryInt(query, "temp", "temp");
 
             closeConnection();
 
@@ -225,7 +231,7 @@ namespace AIS.Back.DBConfig
 
             openConnectionExists(u_, p_);
 
-            int existingNums = createQuerryInt(v);
+            int existingNums = createQuerryInt(v, u_, p_);
 
             if (existingNums > 0)
             {

@@ -18,7 +18,19 @@ namespace AIS
         public MainPage()
         {
             InitializeComponent();
+            setNull();
 
+        }
+
+        private void setNull()
+        {
+
+            usernameEntry.Text = "";
+            passwordEntry.Text = "";
+            _userService.Username = "";
+            _userService.Password = "";
+            _userService.firstName = "";
+            _userService.lastName = "";
         }
 
         private void OnCounterClicked(object sender, EventArgs e)
@@ -50,7 +62,7 @@ namespace AIS
             {
 
 
-                Debug.WriteLine(username + " " + password);
+                //Debug.WriteLine(username + " " + password);
 
                 DBConfig dB = new DBConfig();
                 bool exists = dB.verifyUserExistance(username, password);
@@ -58,12 +70,16 @@ namespace AIS
                 if (exists)
                 {
                     string DBuser = dB.createQuerryString(string.Format("SELECT DBuser FROM ais.users WHERE username = '{0}' AND password = '{1}'", username, password), "temp", "temp");
-                    Debug.WriteLine("User exists");
+                    string firstName = dB.createQuerryString(string.Format("SELECT firstName FROM ais.users WHERE DBuser = '{0}'", DBuser), "temp", "temp");
+                    string lastName = dB.createQuerryString(string.Format("SELECT lastName FROM ais.users WHERE DBuser = '{0}'", DBuser), "temp", "temp");
+                    //Debug.WriteLine("User exists");
                     int userTypeID = dB.getUserTypeID(username, password);
-                    Debug.WriteLine("User type ID = " + userTypeID);
+                    //Debug.WriteLine("User type ID = " + userTypeID);
 
                     _userService.Username = DBuser;
                     _userService.Password = password;
+                    _userService.firstName = firstName;
+                    _userService.lastName = lastName;
                     
                     switch (userTypeID)
                     {
@@ -81,7 +97,7 @@ namespace AIS
                     }
 
                 }
-                else Debug.WriteLine("Does not exist");
+                else //Debug.WriteLine("Does not exist");
                 ErrorLabel.IsVisible = true;
 
             }
@@ -90,15 +106,15 @@ namespace AIS
 
         private async void sendStudent()
         {
-            await Shell.Current.GoToAsync("///Student");
+            await Shell.Current.Navigation.PushAsync(new Student());
         }
         private async void sendLecturer()
         {
-            await Shell.Current.GoToAsync("///Lecturer");
+            await Shell.Current.Navigation.PushAsync(new Lecturer());
         }
         private async void sendAdmin()
         {
-            await Shell.Current.GoToAsync("///Administrator");
+            await Shell.Current.Navigation.PushAsync(new Administrator());
         }
     }
- }
+}

@@ -4,51 +4,70 @@
              x:Class="AIS.Lecturer"
              Title="">
     <VerticalStackLayout>
-        <Label 
-    Text="Sveiki prisijunge."
-    VerticalOptions="Center" 
-    HorizontalOptions="Center" 
-    FontSize="Large"
-    Margin="20"/>
+        <FlexLayout FlowDirection="LeftToRight">
+            <Label 
+            Text="Sveiki prisijungę."
+            FontSize="Large"
+            Margin="10"
+            FlexLayout.Grow="1"
+            HeightRequest="50"
+            />
+            <Label  x:Name="loggedIn"
+            HorizontalOptions="End"
+            Margin="10"
+            FontSize="Large"
+            HeightRequest="50"
+            />
+            <Button x:Name="logOut"
+            WidthRequest="200"
+            Text="Atsijungti"
+            FontSize="Medium"
+            HeightRequest="50"
+            Margin="10"
+            BackgroundColor="SlateGray"
+            TextColor="White"
+            Clicked="onLogoutClicked"
+            />
+        </FlexLayout>
 
         <!--MYGTUKU INTERFEISAS-->
 
         <HorizontalStackLayout>
             <Grid 
-          x:Name="interfaceButtons"
-          ColumnDefinitions="230, 500"
-          RowDefinitions="47, 47, 47, 47, 47, 47, 47, 47"
-          Padding="50 "
-          RowSpacing="50"
-          VerticalOptions="Center"
-          HorizontalOptions="Center">
+                x:Name="interfaceButtons"
+                ColumnDefinitions="230, 500"
+                RowDefinitions="47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47"
+                Padding="50"
+                RowSpacing="20"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
 
                 <Button Grid.Row="0"
-                Grid.Column="0"
-            x:Name="AddGrade"
-            Text="Sukurti iverti"
-            SemanticProperties.Description="Prideti nauja ivertinima i AIS"
-            SemanticProperties.Hint="Paspaudus mygtuka atsiras meniu, leidziantis sukurti nauja ivertinima"
-                Clicked="OnAGClicked"
-            IsVisible="true"
-            />
+                        Grid.Column="0"
+                        x:Name="AddGrade"
+                        Text="Sukurti iverti"
+                        SemanticProperties.Description="Prideti nauja ivertinima i AIS"
+                        SemanticProperties.Hint="Paspaudus mygtuka atsiras meniu, leidziantis sukurti nauja ivertinima"
+                        Clicked="OnAGClicked"
+                        IsVisible="true"
+                />
                 <Button Grid.Row="1"
-                Grid.Column="0"
-            x:Name="EditGrade"
-            Text="Redaguoti iverti"
-            SemanticProperties.Description="Redaguoti iverti studentui"
-            SemanticProperties.Hint="Paspaudus mygtuka atsiras meniu, leidziantis redaguoti esamo studento ivertinima"
-                Clicked="OnEGClicked"
-            IsVisible="true"
-            />
+                        Grid.Column="0"
+                        x:Name="EditGrade"
+                        Text="Redaguoti iverti"
+                        SemanticProperties.Description="Redaguoti iverti studentui"
+                        SemanticProperties.Hint="Paspaudus mygtuka atsiras meniu, leidziantis redaguoti esamo studento ivertinima"
+                        Clicked="OnEGClicked"
+                        IsVisible="true"
+                />
                 <Button Grid.Row="7"
-                Grid.Column="0"
-            x:Name="Back"
-            Text="Grizti"
-            SemanticProperties.Hint="Paspaudus mygtuka sugris destytojo panele"
-                Clicked="OnBackClicked"
-            IsVisible="false"
-        />
+                        Grid.Column="0"
+                        x:Name="Back"
+                        Text="Grizti"
+                        SemanticProperties.Hint="Paspaudus mygtuka sugris destytojo panele"
+                        Clicked="OnBackClicked"
+                        IsVisible="false"
+                />
 
             </Grid>
 
@@ -57,80 +76,179 @@
             <StackLayout>
 
                 <Grid x:Name="interfaceAddGrade" IsVisible="false" HorizontalOptions="Center"
-              RowDefinitions="*, *, *, *, *, *, *, *"
-              ColumnDefinitions="*"
-              Grid.Column="1">
+                    RowDefinitions="*, *, *, *, *, *, *, *, *, *, *"
+                    ColumnDefinitions="*"
+                    Grid.Column="1">
 
-                    <Label Grid.Row="0"
-                   Grid.Column="1"
-                Text="Pasirinkti grupe:"
-                FontSize="Medium"
-                TextDecorations="Underline"
-                Margin="20"
-                HorizontalOptions="Center"
-                />
+                    <Label  Grid.Row="0"
+                            Grid.Column="1"
+                            Text="Pasirinkti grupę:"
+                            FontSize="Medium"
+                            TextDecorations="Underline"
+                            Margin="20"
+                            HorizontalOptions="Center"
+                    />
                     <Picker Grid.Row="1"
                             Grid.Column="1"
-                x:Name="addGradePicker1"
-                SelectedIndexChanged="OnAddGradePicker1Index"
-                WidthRequest="300"
-                Margin="20"
-                />
-                    <Label Grid.Row="2"
-                           Grid.Column="1"
-                Text="Pasirinkti studenta:"
-                FontSize="Medium"
-                TextDecorations="Underline"
-                Margin="20"
-                HorizontalOptions="Center"
-                />
+                            x:Name="addGradePicker1"
+                            SelectedIndexChanged="OnAddGradePicker1Index"
+                            WidthRequest="300"
+                            Margin="20"
+                    />
+                    <Label  Grid.Row="2"
+                            Grid.Column="1"
+                            Text="Pasirinkti paskaitą:"
+                            FontSize="Medium"
+                            TextDecorations="Underline"
+                            Margin="20"
+                            HorizontalOptions="Center"
+                    />
                     <Picker Grid.Row="3"
                             Grid.Column="1"
-                x:Name="addGradePicker2"
-                WidthRequest="300"
-                   Margin="20"
-               />
-                    <Label Grid.Row="4"
-                   Grid.Column="1"
-                Text="Pasirinkti ivertinimo tipa:"
-                FontSize="Medium"
-                TextDecorations="Underline"
-                Margin="20"
-                HorizontalOptions="Center"
-                   />
-                    <Picker x:Name="addGradePicker3"
-                        Grid.Row="5"
-                        Grid.Column="1"
-                        Margin="20"
-                        WidthRequest="300"
-                        HorizontalOptions="Center"
-                        />
-
-                    <Label Grid.Row="5"
-                           Grid.Column="1"
-                     Text="Pasirinkti pazymi"
-                     TextDecorations="Underline"
-                     Margin="20"
-                     HorizontalOptions="Center"
-                           />
-                    <Picker Grid.Row="6"
+                            x:Name="addGradePicker2"
+                            SelectedIndexChanged="OnAddGradePicker2Index"
+                            WidthRequest="300"
+                            Margin="20"
+                    />
+                    <Label  Grid.Row="4"
                             Grid.Column="1"
-                            x:Name="addGradePicker4"
-                     Margin="20"
-                     WidthRequest="300"
-                     HorizontalOptions="Center"
-                            />
-
-                    <Button Grid.Row="7"
-                        Grid.Column="1"
-                x:Name="addGradeBtn"
-                Text="Testi"
-                Clicked="OnAddGradeBtnClicked"
-                HorizontalOptions="Center"
-                WidthRequest="300"
-                        Margin="20"
-                />
+                            Text="Pasirinkti studentą:"
+                            FontSize="Medium"
+                            TextDecorations="Underline"
+                            Margin="20"
+                            HorizontalOptions="Center"
+                    />
+                    <Picker x:Name="addGradePicker3"
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            Margin="20"
+                            WidthRequest="300"
+                            HorizontalOptions="Center"
+                    />
+                    <Label  Grid.Row="6"
+                            Grid.Column="1"
+                            Text="Pasirinkti įvertinimo tipą:"
+                            FontSize="Medium"
+                            TextDecorations="Underline"
+                            Margin="20"
+                            HorizontalOptions="Center"
+                    />
+                    <Picker x:Name="addGradePicker4"
+                            Grid.Row="7"
+                            Grid.Column="1"
+                            Margin="20"
+                            WidthRequest="300"
+                            HorizontalOptions="Center"
+                    />
+                    <Label  Grid.Row="8"
+                            Grid.Column="1"
+                            Text="Pasirinkti pažymį"
+                            FontSize="Medium"
+                            TextDecorations="Underline"
+                            Margin="20"
+                            HorizontalOptions="Center"
+                    />
+                    <Picker Grid.Row="9"
+                            Grid.Column="1"
+                            x:Name="addGradePicker5"
+                            Margin="20"
+                            WidthRequest="300"
+                            HorizontalOptions="Center"
+                    />
+                    <Button Grid.Row="10"
+                            Grid.Column="1"
+                            x:Name="addGradeBtn"
+                            Text="Testi"
+                            Clicked="OnAddGradeBtnClicked"
+                            HorizontalOptions="Center"
+                            WidthRequest="300"
+                            Margin="20"
+                    />
                 </Grid>
+
+                <!--PAZYMIO REDAGAVIMO INTERFEISAS-->
+
+                <StackLayout>
+
+                    <Grid   x:Name="interfaceEditGrade" IsVisible="false" HorizontalOptions="Center"
+                            RowDefinitions="*, *, *, *, *, *, *, *, *"
+                            ColumnDefinitions="*"
+                            Grid.Column="1">
+
+                        <Label  Grid.Row="0"
+                                Grid.Column="1"
+                                Text="Pasirinkti grupę:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Picker Grid.Row="1"
+                                Grid.Column="1"
+                                x:Name="editGradePicker1"
+                                SelectedIndexChanged="OnEGPicker1Index"
+                                WidthRequest="300"
+                                Margin="20"
+                        />
+                        <Label  Grid.Row="2"
+                                Grid.Column="1"
+                                Text="Pasirinkti paskaitą:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Picker Grid.Row="3"
+                                Grid.Column="1"
+                                x:Name="editGradePicker2"
+                                    SelectedIndexChanged="OnEGPicker2Index"
+                                WidthRequest="300"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Label  Grid.Row="4"
+                                Grid.Column="1"
+                                Text="Pasirinkti studentą:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                            />
+                        <Picker Grid.Row="5"
+                                Grid.Column="1"
+                                x:Name="editGradePicker3"
+                                SelectedIndexChanged="OnEGPicker3Index"
+                                WidthRequest="300"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Label  Grid.Row="6"
+                                Grid.Column="1"
+                                Text="Pasirinkti pažymį:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Picker Grid.Row="7"
+                                Grid.Column="1"
+                                x:Name="editGradePicker4"
+                                WidthRequest="300"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Button Grid.Row="8"
+                                Grid.Column="1"
+                                x:Name="editGradeBtn"
+                                Text="Tęsti"
+                                WidthRequest="300"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                                Clicked="OnEditGradeBtnClicked"
+                        />
+                    </Grid>
+
+                </StackLayout>
 
             </StackLayout>
         </HorizontalStackLayout>

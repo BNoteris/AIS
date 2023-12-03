@@ -5,21 +5,40 @@
              Title="">
     <ScrollView>
         <VerticalStackLayout>
-        <Label 
-            Text="Sveiki prisijungę."
-            VerticalOptions="Center" 
-            HorizontalOptions="Start" 
-            FontSize="Large"
-            Margin="10"/>
-            
+            <FlexLayout FlowDirection="LeftToRight">
+                <Label 
+                        Text="Sveiki prisijungę."
+                        FontSize="Large"
+                        Margin="10"
+                        FlexLayout.Grow="1"
+                        HeightRequest="50"
+                />
+                <Label  x:Name="loggedIn"
+                        HorizontalOptions="End"
+                        Margin="10"
+                        FontSize="Large"
+                        HeightRequest="50"
+                />
+                <Button x:Name="logOut"
+                        WidthRequest="200"
+                        Text="Atsijungti"
+                        FontSize="Medium"
+                        HeightRequest="50"
+                        Margin="10"
+                        BackgroundColor="SlateGray"
+                        TextColor="White"
+                        Clicked="onLogoutClicked"
+                        />
+            </FlexLayout>
             <!--MYGTUKU INTERFEISAS-->
 
             <HorizontalStackLayout>
             <Grid 
                   x:Name="interfaceButtons"
                   ColumnDefinitions="230, 500"
-                  RowDefinitions="47, 47, 47, 47, 47, 47, 47, 47, 47, 47"
-                  Padding="50 "
+                  RowDefinitions="47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47"
+                  Padding="20"
+                  Margin="10"
                   RowSpacing="20"
                   VerticalOptions="Center"
                   HorizontalOptions="Center">
@@ -86,17 +105,25 @@
                     />
                 <Button Grid.Row="7"
                         Grid.Column="0"
-                    x:Name="AddLecture"
-                    Text="Sukurti paskaitą"
-                    SemanticProperties.Hint="Paspaudus mygtuka, atsiras meniu, leidziantis sukurti nauja paskaita"
+                        x:Name="AddLecture"
+                        Text="Sukurti paskaitą"
+                        Clicked="OnAddLectureClicked"
+                        SemanticProperties.Hint="Paspaudus mygtuka, atsiras meniu, leidziantis sukurti nauja paskaita"
                 />
                 <Button Grid.Row="8"
                         Grid.Column="0"
-                    x:Name="RemoveLecture"
-                    Text="Panaikinti paskaitą"
-                    SemanticProperties.Hint="Paspaudus mygtuka, atsiras meniu, leidziantis panaikinti esama paskaita"
+                        x:Name="RemoveLecture"
+                        Text="Panaikinti paskaitą"
+                        Clicked="OnRemoveLectureClicked"
+                        SemanticProperties.Hint="Paspaudus mygtuka, atsiras meniu, leidziantis panaikinti esama paskaita"
                 />
-                    <Button Grid.Row="9"
+                <Button Grid.Row="9"
+                        Grid.Column="0"
+                        x:Name="AssignLecture"
+                        Clicked="OnAssignLectureClicked"
+                        Text="Priskirti paskaitą"
+                />
+                    <Button Grid.Row="10"
                         Grid.Column="0"
                     x:Name="Back"
                     Text="Grizti"
@@ -208,19 +235,19 @@
                             />
                         <Picker Grid.Row="3"
                                Grid.Column="1"
-                            x:Name="removeStudentPicker2"
-                            WidthRequest="300"
-                            Margin="20"
+                               x:Name="removeStudentPicker2"
+                               WidthRequest="300"
+                               Margin="20"
                             />
                         <Button Grid.Row="4"
                                 Grid.Column="1"
-                            x:Name="removeStudentBtn"
-                            Text="Tęsti"
-                            Clicked="OnRemoveStudentClicked"
-                            HorizontalOptions="Center"
-                            WidthRequest="300"
-                            Margin="20"
-                            />
+                                x:Name="removeStudentBtn"
+                                Text="Tęsti"
+                                Clicked="OnRemoveStudentClicked"
+                                HorizontalOptions="Center"
+                                WidthRequest="300"
+                                Margin="20"
+                        />
 
                     </Grid>
 
@@ -235,59 +262,44 @@
                           ColumnDefinitions="*"
                           Grid.Column="1">
 
-                        <Label Grid.Row="0"
-                               Grid.Column="1"
-                            Text="Įvesti dėstytojo vardą:"
-                            FontSize="Medium"
-                            TextDecorations="Underline"
-                            Margin="20"
-                            HorizontalOptions="Center"
-                            />
-                        <Entry Grid.Row="1"
-                               Grid.Column="1"
-                        x:Name="fNameLEntry"
-                        Placeholder="Vardas"
-                        WidthRequest="300"
-                        Margin="20"
-                        />
-                        <Label Grid.Row="2"
-                               Grid.Column="1"
-                            Text="Įvesti destytojo pavardę:"
-                            FontSize="Medium"
-                            TextDecorations="Underline"
-                            Margin="20"
-                            HorizontalOptions="Center"
-                            />
-                        <Entry Grid.Row="3"
-                               Grid.Column="1"
-                        x:Name="lNameFEntry"
-                        Placeholder="Pavardė"
-                        WidthRequest="300"
-                        Margin="20"
-                            />
-                        <Label Grid.Row="4"
-                               Grid.Column="1"
-                        Text="Paskirti grupę:"
-                        FontSize="Medium"
-                        TextDecorations="Underline"
-                        Margin="20"
-                        HorizontalOptions="Center"
-                        />
-
-                        <Picker Grid.Row="5"
+                        <Label  Grid.Row="0"
                                 Grid.Column="1"
-                             x:Name="addLecturerPicker"
-                             Margin="20"
+                                Text="Įvesti dėstytojo vardą:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Entry  Grid.Row="1"
+                                Grid.Column="1"
+                                x:Name="fNameLEntry"
+                                Placeholder="Vardas"
                                 WidthRequest="300"
-                            />
+                                Margin="20"
+                        />
+                        <Label  Grid.Row="2"
+                                Grid.Column="1"
+                                Text="Įvesti destytojo pavardę:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Entry  Grid.Row="3"
+                                Grid.Column="1"
+                                x:Name="lNameFEntry"
+                                Placeholder="Pavardė"
+                                WidthRequest="300"
+                                Margin="20"
+                        />
                         <Button Grid.Row="6"
                                 Grid.Column="1"
-                            x:Name="addLecturerBtn"
-                            Text="Tęsti"
-                            Clicked="OnAddLecturerBtnClicked"
-                            WidthRequest="300"
-                            Margin="20"
-                            />
+                                x:Name="addLecturerBtn"
+                                Text="Tęsti"
+                                Clicked="OnAddLecturerBtnClicked"
+                                WidthRequest="300"
+                                Margin="20"
+                        />
                     </Grid>
 
                 </StackLayout>
@@ -296,32 +308,32 @@
 
                 <StackLayout>
 
-                    <Grid x:Name="interfaceRemoveLecturer" IsVisible="false" HorizontalOptions="Center"
-                          RowDefinitions="*, *, *"
-                          ColumnDefinitions="*"
-                          Grid.Column="1">
+                    <Grid   x:Name="interfaceRemoveLecturer" IsVisible="false" HorizontalOptions="Center"
+                            RowDefinitions="*, *, *"
+                            ColumnDefinitions="*"
+                            Grid.Column="1">
 
-                        <Label Grid.Row="0"
-                               Grid.Column="1"
-                        Text="Pasirinkti destytoją:"
-                        FontSize="Medium"
-                        TextDecorations="Underline"
-                        Margin="20"
-                        HorizontalOptions="Center"
+                        <Label  Grid.Row="0"
+                                Grid.Column="1"
+                                Text="Pasirinkti destytoją:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
                         />
                         <Picker Grid.Row="1"
-                               Grid.Column="1"
-                        x:Name="removeLecturerPicker"
-                        WidthRequest="300"
-                        Margin="20"
+                                Grid.Column="1"
+                                x:Name="removeLecturerPicker"
+                                WidthRequest="300"
+                                Margin="20"
                         />
                         <Button Grid.Row="2"
                                 Grid.Column="1"
-                        x:Name="removeLecturerBtn"
-                        Text="Tęsti"
-                        WidthRequest="300"
-                        Margin="20"
-                        Clicked="OnRemoveLecturerBtnClicked"
+                                x:Name="removeLecturerBtn"
+                                Text="Tęsti"
+                                WidthRequest="300"
+                                Margin="20"
+                                Clicked="OnRemoveLecturerBtnClicked"
                         />
                     </Grid>
 
@@ -331,65 +343,65 @@
 
                 <StackLayout>
 
-                    <Grid x:Name="interfaceEditGrade" IsVisible="false" HorizontalOptions="Center"
-                          RowDefinitions="*, *, *, *, *, *, *"
-                          ColumnDefinitions="*"
-                          Grid.Column="1">
+                    <Grid   x:Name="interfaceEditGrade" IsVisible="false" HorizontalOptions="Center"
+                            RowDefinitions="*, *, *, *, *, *, *"
+                            ColumnDefinitions="*"
+                            Grid.Column="1">
 
-                        <Label Grid.Row="0"
-                               Grid.Column="1"
-                            Text="Pasirinkti grupę:"
-                            FontSize="Medium"
-                            TextDecorations="Underline"
-                            Margin="20"
-                            HorizontalOptions="Center"
+                        <Label  Grid.Row="0"
+                                Grid.Column="1"
+                                Text="Pasirinkti grupę:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
                         />
                         <Picker Grid.Row="1"
-                               Grid.Column="1"
-                            x:Name="editGradePicker1"
+                                Grid.Column="1"
+                                x:Name="editGradePicker1"
                                 SelectedIndexChanged="OnEGPicker1Index"
-                            WidthRequest="300"
-                            Margin="20"
-                            />
-                        <Label Grid.Row="2"
-                               Grid.Column="1"
-                            Text="Pasirinkti studentą:"
-                            FontSize="Medium"
-                            TextDecorations="Underline"
-                            Margin="20"
-                            HorizontalOptions="Center"
-                            />
+                                WidthRequest="300"
+                                Margin="20"
+                        />
+                        <Label  Grid.Row="2"
+                                Grid.Column="1"
+                                Text="Pasirinkti studentą:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
                         <Picker Grid.Row="3"
-                               Grid.Column="1"
-                               x:Name="editGradePicker2"
+                                Grid.Column="1"
+                                x:Name="editGradePicker2"
                                     SelectedIndexChanged="OnEGPicker2Index"
-                               WidthRequest="300"
-                               Margin="20"
-                               HorizontalOptions="Center"
-                            />
-                        <Label Grid.Row="4"
-                               Grid.Column="1"
-                            Text="Pasirinkti pažymį:"
-                            FontSize="Medium"
-                            TextDecorations="Underline"
-                            Margin="20"
-                            HorizontalOptions="Center"
+                                WidthRequest="300"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Label  Grid.Row="4"
+                                Grid.Column="1"
+                                Text="Pasirinkti pažymį:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
                             />
                         <Picker Grid.Row="5"
-                               Grid.Column="1"
-                            x:Name="editGradePicker3"
-                            WidthRequest="300"
-                            Margin="20"
-                            HorizontalOptions="Center"
-                            />
+                                Grid.Column="1"
+                                x:Name="editGradePicker3"
+                                WidthRequest="300"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
                         <Button Grid.Row="6"
                                 Grid.Column="1"
-                             x:Name="editGradeBtn"
-                             Text="Tęsti"
-                             WidthRequest="300"
-                             Margin="20"
-                             HorizontalOptions="Center"
-                             Clicked="OnEditGradeBtnClicked"
+                                x:Name="editGradeBtn"
+                                Text="Tęsti"
+                                WidthRequest="300"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                                Clicked="OnEditGradeBtnClicked"
                             
                             />
                     </Grid>
@@ -400,36 +412,36 @@
 
                 <StackLayout>
 
-                    <Grid x:Name="interfaceAddGroup" IsVisible="false" HorizontalOptions="Center"
-                          RowDefinitions="*, *, *"
-                          ColumnDefinitions="*"
-                          Grid.Column="1">
+                    <Grid   x:Name="interfaceAddGroup" IsVisible="false" HorizontalOptions="Center"
+                            RowDefinitions="*, *, *"
+                            ColumnDefinitions="*"
+                            Grid.Column="1">
 
-                        <Label Grid.Row="0"
-                               Grid.Column="1"
-                            Text="Įvesti grupės pavadinimą:"
-                            FontSize="Medium"
-                            TextDecorations="Underline"
-                            Margin="20"
-                            HorizontalOptions="Center"
-                            />
-                        <Entry Grid.Row="1"
-                               Grid.Column="1"
-                            x:Name="gNameEntry"
-                            Placeholder="Pavadinimas"
-                            WidthRequest="300"
-                            Margin="20"
-                            HorizontalOptions="Center"
-                            />
+                        <Label  Grid.Row="0"
+                                Grid.Column="1"
+                                Text="Įvesti grupės pavadinimą:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Entry  Grid.Row="1"
+                                Grid.Column="1"
+                                x:Name="gNameEntry"
+                                Placeholder="Pavadinimas"
+                                WidthRequest="300"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
                         <Button Grid.Row="2"
                                 Grid.Column="1"
-                             x:Name="createGroupBtn"
-                             Text="Tęsti"
-                             Margin="20"
-                             HorizontalOptions="Center"
-                             WidthRequest="300"   
-                             Clicked="OnAddGroupBtnClicked"
-                            />
+                                x:Name="createGroupBtn"
+                                Text="Tęsti"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                                WidthRequest="300"   
+                                Clicked="OnAddGroupBtnClicked"
+                        />
 
                     </Grid>
 
@@ -439,39 +451,178 @@
 
                 <StackLayout>
 
-                    <Grid x:Name="interfaceRemoveGroup" IsVisible="false" HorizontalOptions="Center"
-                          RowDefinitions="*, *, *"
-                          ColumnDefinitions="*"
-                          Grid.Column="1">
+                    <Grid   x:Name="interfaceRemoveGroup" IsVisible="false" HorizontalOptions="Center"
+                            RowDefinitions="*, *, *"
+                            ColumnDefinitions="*"
+                            Grid.Column="1">
 
-                        <Label Grid.Row="0"
-                               Grid.Column="1"
-                            Text="Pasirinkti grupę:"
-                            FontSize="Medium"
-                            TextDecorations="Underline"
-                            Margin="20"
-                            HorizontalOptions="Center"
-                            />
+                        <Label  Grid.Row="0"
+                                Grid.Column="1"
+                                Text="Pasirinkti grupę:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
                         <Picker Grid.Row="1"
-                               Grid.Column="1"
-                            x:Name="groupRemovePicker"
-                            WidthRequest="300"
-                            Margin="20"
-                            />
+                                Grid.Column="1"
+                                x:Name="groupRemovePicker"
+                                WidthRequest="300"
+                                Margin="20"
+                        />
                         <Button Grid.Row="2"
                                 Grid.Column="1"
-                            x:Name="groupRemoveBtn"
-                            Text="Tęsti"
-                            WidthRequest="300"
-                            Margin="20"
-                            Clicked="OnGroupRemoveBtnClicked"
-                            />
+                                x:Name="groupRemoveBtn"
+                                Text="Tęsti"
+                                WidthRequest="300"
+                                Margin="20"
+                                Clicked="OnGroupRemoveBtnClicked"
+                        />
+
+                    </Grid>
+
+                </StackLayout>
+
+                <!--PASKAITOS SUKURIMO INTERFEISAS-->
+
+                <StackLayout>
+
+                    <Grid   x:Name="interfaceAddLecture" IsVisible="false" HorizontalOptions="Center"
+                            RowDefinitions="*, *, *"
+                            ColumnDefinitions="*"
+                            Grid.Column="1">
+
+                        <Label  Grid.Row="0"
+                                Grid.Column="1"
+                                Text="Įveskite paskaitos pavadinimą:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Entry  Grid.Row="1"
+                                Grid.Column="1"
+                                Placeholder="Pavadinimas"
+                                x:Name="lectureNameEntry"
+                                WidthRequest="300"
+                                Margin="20"
+                        />
+                        <Button Grid.Row="2"
+                                Grid.Column="1"
+                                x:Name="lectureCreateBtn"
+                                Text="Tęsti"
+                                WidthRequest="300"
+                                Margin="20"
+                                Clicked="OnLectureCreateBtnClicked"
+                        />
 
                     </Grid>
 
                 </StackLayout>
 
 
+                <!--PASKAITOS SALINIMO INTERFEISAS-->
+
+                <StackLayout>
+
+                    <Grid   x:Name="interfaceRemoveLecture" IsVisible="false" HorizontalOptions="Center"
+                            RowDefinitions="*, *, *"
+                            ColumnDefinitions="*"
+                            Grid.Column="1">
+
+                        <Label  Grid.Row="0"
+                                Grid.Column="1"
+                                Text="Pasirinkti paskaitą:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Picker Grid.Row="1"
+                                Grid.Column="1"
+                                x:Name="lectureRemovePicker"
+                                WidthRequest="300"
+                                Margin="20"
+                        />
+                        <Button Grid.Row="2"
+                                Grid.Column="1"
+                                x:Name="lectureRemoveBtn"
+                                Text="Tęsti"
+                                WidthRequest="300"
+                                Margin="20"
+                                Clicked="OnLectureRemoveBtnClicked"
+                        />
+
+                    </Grid>
+
+                </StackLayout>
+
+                <!--GRUPES PRISKYRIMO INTERFEISAS-->
+
+                <StackLayout>
+
+                    <Grid   x:Name="interfaceAssignLecture" IsVisible="false" HorizontalOptions="Center"
+                            RowDefinitions="*, *, *, *, *, *, *"
+                            ColumnDefinitions="*"
+                            Grid.Column="1">
+
+                        <Label  Grid.Row="0"
+                                Grid.Column="1"
+                                Text="Pasirinkti paskaitą:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Picker Grid.Row="1"
+                                Grid.Column="1"
+                                x:Name="assignLecturePicker1"
+                                WidthRequest="300"
+                                Margin="20"
+                        />
+                        <Label  Grid.Row="2"
+                                Grid.Column="1"
+                                Text="Pasirinkti grupę:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Picker Grid.Row="3"
+                                Grid.Column="1"
+                                x:Name="assignLecturePicker2"
+                                WidthRequest="300"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Label  Grid.Row="4"
+                                Grid.Column="1"
+                                Text="Pasirinkti dėstytoją:"
+                                FontSize="Medium"
+                                TextDecorations="Underline"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Picker Grid.Row="5"
+                                Grid.Column="1"
+                                x:Name="assignLecturePicker3"
+                                WidthRequest="300"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                        />
+                        <Button Grid.Row="6"
+                                Grid.Column="1"
+                                x:Name="assignLectureBtn"
+                                Text="Tęsti"
+                                WidthRequest="300"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                                Clicked="OnAssignLectureBtnClicked"
+                        />
+                    </Grid>
+
+                </StackLayout>
+                
                 
 
 
