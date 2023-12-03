@@ -521,11 +521,13 @@ public partial class Administrator : ContentPage
                 int id = Int32.Parse(selectedItem.Value);
 
                 DBConfig dB = new DBConfig();
+                
                 string fName = dB.createQuerryString(string.Format("SELECT firstName FROM ais.lecturer WHERE lecturerID = '{0}'", id), MainPage._userService.Username, MainPage._userService.Password);
                 string lName = dB.createQuerryString(string.Format("SELECT lastName FROM ais.lecturer WHERE lecturerID = '{0}'", id), MainPage._userService.Username, MainPage._userService.Password);
+                string DBuser = dB.createQuerryString(string.Format("SELECT DBuser FROM ais.users WHERE firstName = '{0}' AND lastName = '{1}'", fName, lName), MainPage._userService.Username, MainPage._userService.Password);
                 dB.createQuerry(string.Format("DELETE FROM ais.lecturer WHERE lecturerID = '{0}'", id), MainPage._userService.Username, MainPage._userService.Password);
                 dB.createQuerry(string.Format("DELETE FROM ais.users WHERE firstName = '{0}' AND lastName = '{1}'", fName, lName), MainPage._userService.Username, MainPage._userService.Password);
-                dB.createQuerry(string.Format("DROP USER '{0}'", fName), MainPage._userService.Username, MainPage._userService.Password);
+                dB.createQuerry(string.Format("DROP USER '{0}'", DBuser), MainPage._userService.Username, MainPage._userService.Password);
 
                 resetPickers();
                 lecturerList();
